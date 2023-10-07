@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Mac custom attributes file (Desktop Service Store)
+.DS_Store
+
+# PyCharm files
+.idea/
+
+# Instance Folder
+instance/*_full.py
+instance/*.db
+instance/*.log*
+
+# Coverage output
+.coverage
+
+# Virtual Environment
+/venv/
+
+# pytest files
+.pytest_cache/
+
+# vscode
+.vscode
