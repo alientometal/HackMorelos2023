@@ -1,6 +1,7 @@
 from flask import url_for, render_template, redirect, session, request, jsonify
 
 import json
+import os
 
 from pydantic import BaseModel, validator, ValidationError
 from typing import Optional
@@ -11,30 +12,30 @@ from sqlalchemy.exc import DBAPIError
 
 from . import conekta_blueprint
 
+from .api_wrapper import ConektaAPI
+
 # TODOI: Add a new route.
+
+API_KEY = os.getenv('BEARER_TOKEN')
+
+session = {"customer_info": {
+        "name":"DevTest",
+        "email": "test@conekta.com",
+        "phone": "5522997233" }
+        } 
 
 @conekta_blueprint.route('/', methods=['GET', 'POST'])
 def hello_world():
-     return 'This is a Python Flask Application'
+     return 'This is a Python Flask Application wrapping the Conekta API.'
 
-@conekta_blueprint.route('/connection', methods=['GET'])
-def get_system_data():
-    fron_info = request.args.get('data')
 
-# This is an example of how to get data from the frontend
-@conekta_blueprint.route('/create_payment', methods=['POST'])
-def create_payment():
-    data = request.json
-    amount = data.get('amount')
-    currency = data.get('currency')
-    payment_response = payment_integration.create_payment(amount, currency)
-    return jsonify(payment_response)
+@conekta_blueprint.route('/create_charge', methods=['POST'])
+def create_charge():
+    conekta = ConektaAPI(API_KEY)
+    parameters = request.args
+    body = request.json
+    
+    order_id = parameters.get('ord_id')
 
-@app.route('/create_order', methods=['POST'])
-def create_order():
-    order_data = request.json
-    payment_response = ConektaAPI.create_order(order_data)
-    return jsonify(payment_response)
-  
-
-    return jsonify([])
+    response = conekta.create_charge(order_id, body)
+    return jsonify(response)

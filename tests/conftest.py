@@ -33,15 +33,3 @@ def client(app):
 @pytest.fixture()
 def runner(app):
     return app.test_cli_runner()
-
-@pytest.fixture()
-def client_with_new_ingestion_session(client):
-    with client.session_transaction() as sess:
-        sess["EDL_PROCESS"] = "New Ingestion"
-    return client
-
-@pytest.fixture()
-def client_with_new_outbound_session(client):
-    with client.session_transaction() as sess:
-        sess["EDL_PROCESS"] = "New Outbound"
-    return client
