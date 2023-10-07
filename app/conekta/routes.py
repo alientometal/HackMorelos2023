@@ -28,6 +28,13 @@ session = {"customer_info": {
 def hello_world():
      return 'This is a Python Flask Application wrapping the Conekta API.'
 
+@conekta_blueprint.route('/create_order', methods=['POST'])
+def create_charge():
+    conekta = ConektaAPI(API_KEY)
+    body = request.json
+
+    response = conekta.create_order(body)
+    return jsonify(response)
 
 @conekta_blueprint.route('/create_charge', methods=['POST'])
 def create_charge():

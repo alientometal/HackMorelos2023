@@ -18,3 +18,18 @@ class ConektaAPI:
             data=json.dumps(body)
         )
         return response.json()
+
+    def create_order(self, body):
+    
+        headers = {
+            "accept": "application/vnd.conekta-v2.1.0+json",
+            "Accept-Language": "es",
+            "content-type": "application/json",
+            "authorization": f"Bearer {self.api_key}"
+        }
+        response = requests.post(
+            "https://api.conekta.io/orders",
+            headers=headers,
+            data=json.dumps(body)
+        )
+        return response.json()
