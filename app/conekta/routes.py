@@ -29,7 +29,7 @@ def hello_world():
      return 'This is a Python Flask Application wrapping the Conekta API.'
 
 @conekta_blueprint.route('/create_order', methods=['POST'])
-def create_charge():
+def create_order():
     conekta = ConektaAPI(API_KEY)
     body = request.json
 
