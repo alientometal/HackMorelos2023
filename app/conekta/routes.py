@@ -14,7 +14,7 @@ from . import conekta_blueprint
 
 from .api_wrapper import ConektaAPI
 
-# TODOI: Add a new route.
+# TODO: Add a new route.
 
 API_KEY = os.getenv('BEARER_TOKEN')
 
